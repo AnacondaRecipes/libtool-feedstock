@@ -18,7 +18,7 @@ source:
     # - 0004-apple-silicon.patch
 
 build:
-  number: 1007
+  number: 1008
   skip: True  # [win]
   ignore_run_exports:
     - libstdcxx-ng
