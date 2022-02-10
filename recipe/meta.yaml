@@ -40,16 +40,17 @@ test:
     - libtool --help
 
 about:
-  home: http://www.gnu.org/software/libtool/
+  home: https://www.gnu.org/software/libtool/
   license: GPL-2.0-or-later
+  license_family: GPL
   license_file: COPYING
   summary: The GNU Portable Library Tool
   description: |
     GNU libtool is a generic library support script. Libtool hides the
     complexity of using shared libraries behind a consistent, portable
     interface.
-  doc_url: http://www.gnu.org/software/libtool/manual/
-  dev_url: http://git.savannah.gnu.org/cgit/libtool.git
+  doc_url: https://www.gnu.org/software/libtool/manual/
+  dev_url: https://git.savannah.gnu.org/cgit/libtool.git
 
 extra:
   recipe-maintainers:
