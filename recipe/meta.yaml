@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://ftp-gnu-org.ip-connect.vn.ua/libtool/libtool-{{ version }}.tar.gz
+  url: https://ftpmirror.gnu.org/libtool/libtool-{{ version }}.tar.gz
   sha256: e3bd4d5d3d025a36c21dd6af7ea818a2afcd4dfc1ea5a17b39d7854bcd0c06e3
   patches:
     # From: https://bugs.debian.org/cgi-bin/bugreport.cgi?att=1;bug=557388;filename=link-as-needed.patch;msg=5
