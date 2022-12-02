@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -xe
+
 export HELP2MAN=$(which true)
 export M4=m4
 export SED=$(which sed)
