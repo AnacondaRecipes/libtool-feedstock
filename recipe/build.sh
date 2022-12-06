@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -xe
+
 export HELP2MAN=$(which true)
 export M4=m4
 export SED=$(which sed)
@@ -29,7 +31,7 @@ make -j${CPU_COUNT} ${VERBOSE_AT}
 #if ! make check; then
 if false; then
   FAILURES=$(cat tests/testsuite.log | grep FAILED | wc -l | awk '{print $1}')
-  if [[ ${FAILURES} > 5 ]]; then
+  if [[ ${FAILURES} -gt 5 ]]; then
     echo "Expected 5 failures from the libtool testsuite due to cyclic dependency between libtool and autoconf/automake. Got ${FAILURES}"
     echo "See: http://lists.linuxfromscratch.org/pipermail/lfs-dev/2014-December/069805.html"
     echo "The expected failures are:"
