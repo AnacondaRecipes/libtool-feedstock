@@ -1,4 +1,4 @@
-{% set version = "2.4.6" %}
+{% set version = "2.4.7" %}
 
 package:
   name: libtool
@@ -6,19 +6,17 @@ package:
 
 source:
   url: https://ftpmirror.gnu.org/libtool/libtool-{{ version }}.tar.gz
-  sha256: e3bd4d5d3d025a36c21dd6af7ea818a2afcd4dfc1ea5a17b39d7854bcd0c06e3
+  sha256: 04e96c2404ea70c590c546eba4202a4e12722c640016c12b9b2f1ce3d481e9a8
   patches:
     # From: https://bugs.debian.org/cgi-bin/bugreport.cgi?att=1;bug=557388;filename=link-as-needed.patch;msg=5
     # See: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=347650
     # and: https://sigquit.wordpress.com/2011/02/16/why-asneeded-doesnt-work-as-expected-for-your-libraries-on-your-autotools-project/
-    - 0001-link-as-needed.patch
-    - 0002-apple-silicon.patch
-    - 0003-apple-silicon.patch
-    # This patch is applied after libtool is installed to avoid needing libtool for building libtool
-    # - 0004-apple-silicon.patch
+    - patches/0001-link-as-needed.patch
+    - patches/0002-apple-silicon.patch
+
 
 build:
-  number: 1009
+  number: 0
   skip: True  # [win]
   ignore_run_exports:
     - libstdcxx-ng
@@ -36,9 +34,9 @@ requirements:
     - patch
 
 test:
-  commands:
-    - libtool --version
-    - libtool --help
+  requires:
+    - {{ compiler('cxx') }}
+  # The test commands are moved to run_test.sh
 
 about:
   home: https://www.gnu.org/software/libtool/
