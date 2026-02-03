@@ -1,45 +1,75 @@
-{% set version = "2.4.7" %}
+{% set name = "libtool" %}
+{% set version = "2.6.0" %}
 
 package:
-  name: libtool
+  name: {{ name|lower }}-split
   version: {{ version }}
 
 source:
-  url: https://ftpmirror.gnu.org/libtool/libtool-{{ version }}.tar.gz
-  sha256: 04e96c2404ea70c590c546eba4202a4e12722c640016c12b9b2f1ce3d481e9a8
-  patches:
-    # From: https://bugs.debian.org/cgi-bin/bugreport.cgi?att=1;bug=557388;filename=link-as-needed.patch;msg=5
-    # See: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=347650
-    # and: https://sigquit.wordpress.com/2011/02/16/why-asneeded-doesnt-work-as-expected-for-your-libraries-on-your-autotools-project/
-    - patches/0001-link-as-needed.patch
-    - patches/0002-apple-silicon.patch
-
+  url: https://alpha.gnu.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: ac9d4b8e072aa20d030d5ae039aba3b52bd7967b09e0c21f91f3e3dc1bbb8755
 
 build:
   number: 0
-  skip: True  # [win]
-  ignore_run_exports:
-    - libstdcxx-ng
-    - libcxx
+  skip: true  # [win]
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
     - m4
     - help2man
     - autoconf
     - automake
     - make
-    - patch
 
-test:
-  requires:
-    - {{ compiler('cxx') }}
-  # The test commands are moved to run_test.sh
+outputs:
+  - name: libltdl
+    script: build_libltdl.sh
+    build:
+      run_exports:
+        - {{ pin_subpackage('libltdl', max_pin='x.x') }}
+    requirements:
+      build:
+        - {{ stdlib('c') }}
+        - {{ compiler('c') }}
+        - m4
+        - help2man
+        - autoconf
+        - automake
+        - make
+        - texinfo
+        - patch
+    about:
+      license: LGPL-2.0-or-later
+      license_file: libltdl/COPYING.LIB
+  - name: libtool
+    script: build_libtool.sh
+    build:
+    requirements:
+      build:
+        - {{ stdlib('c') }}
+        - {{ compiler('c') }}
+        - m4
+        - help2man
+        - autoconf
+        - automake
+        - make
+        - texinfo
+        - patch
+      host:
+        - {{ pin_subpackage('libltdl', exact=true) }}
+      run:
+        - {{ pin_subpackage('libltdl', exact=true) }}
+    test:
+      requires:
+        - {{ compiler('cxx') }}
+    about:
+      license: GPL-2.0-or-later
+      license_file:  COPYING
 
 about:
-  home: https://www.gnu.org/software/libtool/
+  home: https://www.gnu.org/software/libtool
   license: GPL-2.0-or-later
   license_family: GPL
   license_file: COPYING
@@ -48,7 +78,7 @@ about:
     GNU libtool is a generic library support script. Libtool hides the
     complexity of using shared libraries behind a consistent, portable
     interface.
-  doc_url: https://www.gnu.org/software/libtool/manual/
+  doc_url: https://www.gnu.org/software/libtool/manual
   dev_url: https://git.savannah.gnu.org/cgit/libtool.git
 
 extra:
