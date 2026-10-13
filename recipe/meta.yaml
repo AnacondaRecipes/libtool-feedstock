@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://alpha.gnu.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ac9d4b8e072aa20d030d5ae039aba3b52bd7967b09e0c21f91f3e3dc1bbb8755
+  url: https://mirrors.kernel.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 24adb3aa9ae035c70faba344af57d73215eb89281045af6c7ccd307751f8b0bf
 
 build:
   number: 0
