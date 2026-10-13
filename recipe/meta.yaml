@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://mirrors.kernel.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://ftp.gnu.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 24adb3aa9ae035c70faba344af57d73215eb89281045af6c7ccd307751f8b0bf
 
 build:
